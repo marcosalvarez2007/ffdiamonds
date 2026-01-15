@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FFDiamonds – Recarga Diamantes Free Fire</title>
 
+<!-- FAVICON -->
+<link rel="icon" type="image/png" href="favicon.png">
+
 <style>
 :root{
   --bg:#0b0b12;
@@ -16,7 +19,6 @@
 }
 
 *{box-sizing:border-box;font-family:Inter,system-ui,Arial,sans-serif}
-
 body{margin:0;background:var(--bg);color:var(--text)}
 
 header{
@@ -61,7 +63,6 @@ footer{text-align:center;color:var(--muted);padding:24px}
   position:fixed;inset:0;background:rgba(0,0,0,.6);
   display:none;align-items:center;justify-content:center;
 }
-
 #modal .card{max-width:360px;width:100%}
 </style>
 </head>
@@ -69,13 +70,13 @@ footer{text-align:center;color:var(--muted);padding:24px}
 <body>
 
 <header>
-  <h1>💎 FFDiamantes</h1>
+  <h1>💎 FFDiamonds</h1>
   <button class="btn" onclick="logout()">Cerrar sesión</button>
 </header>
 
 <section class="hero">
   <h2>Área de <span>Revendedores</span></h2>
-  <p>Precios exclusivos – sesión guardada automáticamente</p>
+  <p>Precios exclusivos – sesión guardada automáticamente 🔒</p>
 </section>
 
 <!-- LOGIN -->
@@ -85,11 +86,13 @@ footer{text-align:center;color:var(--muted);padding:24px}
     <input id="user" placeholder="Usuario">
     <input id="pass" type="password" placeholder="Contraseña">
     <button class="btn" style="width:100%" onclick="login()">Ingresar</button>
-    <p id="error" style="color:#ff5e5e;display:none;text-align:center">Datos incorrectos</p>
+    <p id="error" style="color:#ff5e5e;display:none;text-align:center">
+      Datos incorrectos
+    </p>
   </div>
 </section>
 
-<!-- PRECIOS -->
+<!-- PRECIOS REVENDEDOR -->
 <section class="grid" id="revPrices" style="display:none">
   <div class="card">
     <h3>110 💎</h3>
@@ -109,17 +112,17 @@ footer{text-align:center;color:var(--muted);padding:24px}
   <div class="card">
     <h3>1166 💎</h3>
     <div class="price">$8.220 ARS</div>
-    <button class="btn" onclick="comprar('572 Diamantes')">Comprar</button>
+    <button class="btn" onclick="comprar('1166 Diamantes')">Comprar</button>
   </div>
   <div class="card">
     <h3>2342 💎</h3>
     <div class="price">$16.465 ARS</div>
-    <button class="btn" onclick="comprar('572 Diamantes')">Comprar</button>
+    <button class="btn" onclick="comprar('2342 Diamantes')">Comprar</button>
   </div>
   <div class="card">
     <h3>6160 💎</h3>
     <div class="price">$42.144 ARS</div>
-    <button class="btn" onclick="comprar('572 Diamantes')">Comprar</button>
+    <button class="btn" onclick="comprar('6160 Diamantes')">Comprar</button>
   </div>
 </section>
 
@@ -129,14 +132,32 @@ footer{text-align:center;color:var(--muted);padding:24px}
 <div id="modal">
   <div class="card">
     <h3>Finalizar compra</h3>
+
     <input id="ffid" placeholder="ID de Free Fire">
+
     <select id="pago">
       <option value="">Método de pago</option>
       <option>Mercado Pago</option>
       <option>PayPal</option>
       <option>Otro</option>
     </select>
-    <button class="btn" style="width:100%" onclick="enviarPedido()">Enviar pedido</button>
+
+    <!-- LINK DE PAGO -->
+    <a href="https://mpago.la/marcoxx.187" target="_blank"
+       class="btn" style="width:100%;display:block;text-align:center;margin-top:8px">
+      💳 Pagar
+    </a>
+
+    <!-- COMPROBANTE -->
+    <label style="font-size:14px;margin-top:10px;display:block">
+      📎 Subir comprobante
+    </label>
+    <input type="file" id="comprobante" accept="image/*">
+
+    <button class="btn" style="width:100%;margin-top:10px"
+            onclick="enviarPedido()">
+      Enviar pedido
+    </button>
   </div>
 </div>
 
@@ -149,7 +170,9 @@ function login(){
   if(user.value==="revendedor" && pass.value==="1234"){
     localStorage.setItem("revLogin","ok");
     mostrar();
-  }else error.style.display="block";
+  }else{
+    error.style.display="block";
+  }
 }
 
 // MOSTRAR SI YA LOGUEADO
@@ -175,11 +198,21 @@ function comprar(prod){
 function enviarPedido(){
   const id = ffid.value;
   const pago = document.getElementById("pago").value;
+  const comp = document.getElementById("comprobante").files.length ? "Sí" : "No";
 
-  if(!id || !pago) return alert("Completa todos los datos");
+  if(!id || !pago){
+    alert("Completa todos los datos");
+    return;
+  }
 
-  const msg = `Hola! Soy revendedor.%0AProducto: ${productoSeleccionado}%0AID Free Fire: ${id}%0AMétodo de pago: ${pago}`;
-  window.open(whatsapp + msg, "_blank");
+  const msg =
+`Hola! Soy revendedor.
+Producto: ${productoSeleccionado}
+ID Free Fire: ${id}
+Método de pago: ${pago}
+Comprobante adjunto: ${comp}`;
+
+  window.open(whatsapp + encodeURIComponent(msg), "_blank");
 }
 </script>
 
