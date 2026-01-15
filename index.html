@@ -142,17 +142,9 @@ footer{text-align:center;color:var(--muted);padding:24px}
       <option>Otro</option>
     </select>
 
-    <!-- LINK DE PAGO -->
-    <a href="https://mpago.la/marcoxx.187" target="_blank"
-       class="btn" style="width:100%;display:block;text-align:center;margin-top:8px">
-      💳 Pagar
-    </a>
+    
 
-    <!-- COMPROBANTE -->
-    <label style="font-size:14px;margin-top:10px;display:block">
-      📎 Subir comprobante
-    </label>
-    <input type="file" id="comprobante" accept="image/*">
+    
 
     <button class="btn" style="width:100%;margin-top:10px"
             onclick="enviarPedido()">
@@ -163,11 +155,11 @@ footer{text-align:center;color:var(--muted);padding:24px}
 
 <script>
 let productoSeleccionado = "";
-const whatsapp = "https://wa.me/543517016162?text=";
+const whatsapp = "https://chat.whatsapp.com/KX4IR1rjEdU34e4YPBmHmP";
 
 // LOGIN
 function login(){
-  if(user.value==="revendedor" && pass.value==="1234"){
+  if(user.value==="user" && pass.value==="1234"){
     localStorage.setItem("revLogin","ok");
     mostrar();
   }else{
