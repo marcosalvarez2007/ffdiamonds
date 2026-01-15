@@ -142,10 +142,6 @@ footer{text-align:center;color:var(--muted);padding:24px}
       <option>Otro</option>
     </select>
 
-    
-
-    
-
     <button class="btn" style="width:100%;margin-top:10px"
             onclick="enviarPedido()">
       Enviar pedido
@@ -155,7 +151,7 @@ footer{text-align:center;color:var(--muted);padding:24px}
 
 <script>
 let productoSeleccionado = "";
-const whatsapp = "https://wa.me/543517016162?text=";
+const whatsappBase = "https://wa.me/543517016162?text=";
 
 // LOGIN
 function login(){
@@ -186,11 +182,10 @@ function comprar(prod){
   modal.style.display="flex";
 }
 
-// ENVIAR A WHATSAPP
+// ENVIAR A WHATSAPP (FUNCIONA)
 function enviarPedido(){
-  const id = ffid.value;
+  const id = ffid.value.trim();
   const pago = document.getElementById("pago").value;
-  const comp = document.getElementById("comprobante").files.length ? "Sí" : "No";
 
   if(!id || !pago){
     alert("Completa todos los datos");
@@ -198,13 +193,12 @@ function enviarPedido(){
   }
 
   const msg =
-`Hola! Soy revendedor.
+`
 Producto: ${productoSeleccionado}
 ID Free Fire: ${id}
-Método de pago: ${pago}
-Comprobante adjunto: ${comp}`;
+Método de pago: ${pago}`;
 
-  window.open(whatsapp + encodeURIComponent(msg), "_blank");
+  window.open(whatsappBase + encodeURIComponent(msg), "_blank");
 }
 </script>
 
